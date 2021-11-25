@@ -1,12 +1,13 @@
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: ['./src/index'],
+    context: path.resolve(__dirname, 'src'),
+    entry: ['./index.js'],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -30,8 +31,12 @@ module.exports = {
             }
         ],
     },
+    devtool: "source-map",
     optimization: {
         moduleIds: 'named',
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
